@@ -1,5 +1,5 @@
-import { Empire, MillenniumFalcon } from '../types';
+import { Empire, MillenniumFalcon, Route } from '../types';
 
-export function calculateSuccessProbability(millenniumFalcon: MillenniumFalcon, empire: Empire): number {
+export function calculateSuccessProbability(falcon: MillenniumFalcon, empire: Empire, routes: Route[]): number {
   return 0;
 }
