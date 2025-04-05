@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "dev:backend": "pnpm --filter backend dev",
     "cli": "pnpm --filter cli start",
     "lint": "eslint . --ext .ts,.tsx",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,mjs}\""
