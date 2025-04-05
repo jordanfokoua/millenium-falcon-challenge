@@ -1,0 +1,22 @@
+{
+  "name": "give-me-the-odds",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "give-me-the-odds": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx watch src/index.ts",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "commander": "^11.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.19",
+    "tsx": "^4.7.0",
+    "typescript": "^5.8.3"
+  }
+}
