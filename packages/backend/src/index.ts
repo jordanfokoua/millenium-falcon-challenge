@@ -1,4 +1,5 @@
 import cors from 'cors';
+import { errorHandler } from './middleware/error.middleware';
 import express from 'express';
 import healthRouter from './routes/health.route';
 import oddsRouter from './routes/odds.route';
@@ -10,6 +11,7 @@ app.use(express.json());
 
 app.use('/api/odds', oddsRouter);
 app.use('/api/health', healthRouter);
+app.use(errorHandler);
 
 app.listen(port, () => {
   console.log(`Millennium Falcon started at http://localhost:${port}`);
