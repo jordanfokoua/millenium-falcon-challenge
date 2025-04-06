@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
+import { calculateSuccessProbability } from 'core';
+import { loadInputs } from './loader.js';
 
 const program = new Command();
 
@@ -10,8 +12,15 @@ program
   .version('1.0.0')
   .argument('<millennium-falcon>', 'path to millennium-falcon.json')
   .argument('<empire>', 'path to empire.json')
-  .action(() => {
-    console.log('Probability of success:', 1);
+  .action(async (millenniumFalconPath: string, empirePath: string) => {
+    try {
+      const { falcon, empire, routes } = await loadInputs(millenniumFalconPath, empirePath);
+      const odds = calculateSuccessProbability(falcon, empire, routes) * 100;
+      console.log(odds);
+    } catch (error) {
+      console.error('Error:', error);
+      process.exit(1);
+    }
   });
 
 program.parse(process.argv);

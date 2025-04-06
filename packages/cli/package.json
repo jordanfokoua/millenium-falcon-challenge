@@ -12,7 +12,8 @@
     "start": "node dist/index.js"
   },
   "dependencies": {
-    "commander": "^11.1.0"
+    "commander": "^11.1.0",
+    "core": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^20.11.19",

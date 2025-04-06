@@ -2,9 +2,17 @@
   "name": "core",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "prebuild": "pnpm approve-builds better-sqlite3 && pnpm rebuild better-sqlite3",
+    "build": "tsc",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "pnpm run build"
   },
   "keywords": [],
   "author": "",

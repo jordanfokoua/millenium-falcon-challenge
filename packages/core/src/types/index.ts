@@ -7,6 +7,7 @@ export interface MillenniumFalcon {
   autonomy: number;
   departure: string;
   arrival: string;
+  routes_db?: string;
 }
 
 export interface Route {
