@@ -11,10 +11,14 @@
   "license": "ISC",
   "packageManager": "pnpm@10.7.1",
   "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
     "@types/mocha": "^10.0.10",
     "@types/node": "^20.17.30",
     "mocha": "^11.1.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.9.1"
   }
 }

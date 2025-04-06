@@ -17,8 +17,8 @@ describe('findAllPaths', () => {
     };
 
     const routes: Route[] = [
-      { origin: 'Tatooine', destination: 'Dagobah', travelTime: 6 },
-      { origin: 'Dagobah', destination: 'Endor', travelTime: 4 },
+      { origin: 'Tatooine', destination: 'Dagobah', travel_time: 6 },
+      { origin: 'Dagobah', destination: 'Endor', travel_time: 4 },
     ];
 
     const paths = findAllPaths(falcon, empire, routes);
@@ -42,7 +42,7 @@ describe('findAllPaths', () => {
     };
 
     const routes: Route[] = [
-      { origin: 'Tatooine', destination: 'Endor', travelTime: 5 },
+      { origin: 'Tatooine', destination: 'Endor', travel_time: 5 },
     ];
 
     const paths = findAllPaths(falcon, empire, routes);
@@ -66,10 +66,10 @@ describe('findAllPaths', () => {
     };
 
     const routes: Route[] = [
-      { origin: 'Tatooine', destination: 'Dagobah', travelTime: 6 },
-      { origin: 'Dagobah', destination: 'Endor', travelTime: 4 },
-      { origin: 'Tatooine', destination: 'Hoth', travelTime: 6 },
-      { origin: 'Hoth', destination: 'Endor', travelTime: 4 },
+      { origin: 'Tatooine', destination: 'Dagobah', travel_time: 6 },
+      { origin: 'Dagobah', destination: 'Endor', travel_time: 4 },
+      { origin: 'Tatooine', destination: 'Hoth', travel_time: 6 },
+      { origin: 'Hoth', destination: 'Endor', travel_time: 4 },
     ];
 
     const paths = findAllPaths(falcon, empire, routes);
@@ -102,8 +102,8 @@ describe('findAllPaths', () => {
     };
 
     const routes: Route[] = [
-      { origin: 'Tatooine', destination: 'Dagobah', travelTime: 6 },
-      { origin: 'Dagobah', destination: 'Endor', travelTime: 4 },
+      { origin: 'Tatooine', destination: 'Dagobah', travel_time: 6 },
+      { origin: 'Dagobah', destination: 'Endor', travel_time: 4 },
     ];
 
     const paths = findAllPaths(falcon, empire, routes);
@@ -123,7 +123,7 @@ describe('findAllPaths', () => {
     };
 
     const routes: Route[] = [
-      { origin: 'Tatooine', destination: 'Endor', travelTime: 6 },
+      { origin: 'Tatooine', destination: 'Endor', travel_time: 6 },
     ];
 
     const paths = findAllPaths(falcon, empire, routes);

@@ -16,6 +16,14 @@ export function findAllPaths(falcon: MillenniumFalcon, empire: Empire, routes: R
   const paths: Path[] = [];
   const REFUEL_COST = 1;
 
+  // A simple memoization to avoid processing the same state repeatedly.
+  const visited = new Set<string>();
+
+  // Helper to build a unique key for the current travel state.
+  function stateKey(state: TravelState): string {
+    return `${state.planet}-${state.day}-${state.fuel}`;
+  }
+
   /**
    * Depth-first search to explore paths
    * @param state - The current travel state including planet, day, remaining fuel, and the path so far
@@ -30,28 +38,47 @@ export function findAllPaths(falcon: MillenniumFalcon, empire: Empire, routes: R
       return;
     }
 
+    const key = stateKey(state);
+    if (visited.has(key)) {
+      return;
+    }
+    visited.add(key);
+
+    // --- Waiting branch ---
+    // Even if there's enough fuel, the Falcon can wait one day on the current planet
+    // to potentially avoid bounty hunters on a subsequent landing
+    if (day < empire.countdown) {
+      dfs({
+        planet,
+        day: day + 1,
+        fuel,
+        path: [...path, { name: planet, day: day + 1, action: 'wait' }],
+      });
+    }
+
+    // --- Travel branches ---
     for (const edge of graph.get(planet) || []) {
       const nextPlanet = edge.planet;
-      const travelTime = edge.travelTime;
+      const travel_time = edge.travel_time;
 
-      if (fuel >= travelTime) {
+      if (fuel >= travel_time) {
         dfs({
           planet: nextPlanet,
-          day: day + travelTime,
-          fuel: fuel - travelTime,
+          day: day + travel_time,
+          fuel: fuel - travel_time,
           path: [...path, { name: planet, day }],
         });
       }
 
       // If fuel is insufficient and a refuel is possible (refuel takes 1 day),
       // then refuel and attempt the jump.
-      if (fuel < travelTime && falcon.autonomy >= travelTime) {
+      if (fuel < travel_time && falcon.autonomy >= travel_time) {
         dfs({
           planet: nextPlanet,
-          day: day + REFUEL_COST + travelTime,
-          fuel: falcon.autonomy - travelTime, // Reset fuel to full autonomy, then subtract jump fuel.
+          day: day + REFUEL_COST + travel_time, // 1 day for refueling plus travel time.
+          fuel: falcon.autonomy - travel_time, // Reset fuel to full autonomy, then subtract jump fuel.
           // Record the current planet (stop) and the refuel stop (same planet, next day).
-          path: [...path, { name: planet, day }, { name: planet, day: day + REFUEL_COST }],
+          path: [...path, { name: planet, day }, { name: planet, day: day + REFUEL_COST, action: 'refuel' }],
         });
       }
     }
@@ -75,8 +102,7 @@ export function findAllPaths(falcon: MillenniumFalcon, empire: Empire, routes: R
  * @returns A map where each key is a planet name and the value is an array of connected planets with travel times
  */
 function buildGraph(routes: Route[]) {
-  const graph = new Map<string, { planet: string; travelTime: number }[]>();
-
+  const graph = new Map<string, { planet: string; travel_time: number }[]>();
   for (const route of routes) {
     if (!graph.has(route.origin)) {
       graph.set(route.origin, []);
@@ -86,15 +112,8 @@ function buildGraph(routes: Route[]) {
     }
     // Since travel is possible in both directions, add an edge from origin
     // to destination and from destination to origin
-    graph.get(route.origin)!.push({
-      planet: route.destination,
-      travelTime: route.travelTime,
-    });
-    graph.get(route.destination)!.push({
-      planet: route.origin,
-      travelTime: route.travelTime,
-    });
+    graph.get(route.origin)!.push({ planet: route.destination, travel_time: route.travel_time });
+    graph.get(route.destination)!.push({ planet: route.origin, travel_time: route.travel_time });
   }
-
   return graph;
 }

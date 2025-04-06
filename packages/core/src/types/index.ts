@@ -12,7 +12,7 @@ export interface MillenniumFalcon {
 export interface Route {
   origin: string;
   destination: string;
-  travelTime: number;
+  travel_time: number;
 }
 
 export interface BountyHunter {
@@ -23,8 +23,16 @@ export interface BountyHunter {
 export interface PlanetVisit {
   name: string;
   day: number;
+  action?: 'wait' | 'refuel';
 }
 
 export interface Path {
   planets: PlanetVisit[];
+}
+
+export interface TravelState {
+  planet: string;
+  day: number;
+  fuel: number;
+  path: PlanetVisit[];
 }
