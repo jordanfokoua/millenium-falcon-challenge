@@ -15,7 +15,7 @@ program
   .action(async (millenniumFalconPath: string, empirePath: string) => {
     try {
       const { falcon, empire, routes } = await loadInputs(millenniumFalconPath, empirePath);
-      const odds = calculateSuccessProbability(falcon, empire, routes) * 100;
+      const odds = calculateSuccessProbability(falcon, empire, routes);
       console.log(odds);
     } catch (error) {
       console.error('Error:', error);

@@ -6,7 +6,5 @@ export interface DatabaseConfig {
 
 export interface Database {
   getAllRoutes(): Promise<Route[]>;
-  getRoutesFromPlanet(planet: string): Promise<Route[]>;
-  getRoutesToPlanet(planet: string): Promise<Route[]>;
   close(): Promise<void>;
 } 

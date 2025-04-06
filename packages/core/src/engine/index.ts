@@ -24,5 +24,5 @@ export function calculateSuccessProbability(falcon: MillenniumFalcon, empire: Em
     bestSuccessRate = Math.max(bestSuccessRate, successProb);
   }
 
-  return Math.round(bestSuccessRate * 100) / 100;
+  return Math.round(bestSuccessRate * 100);
 }
