@@ -113,6 +113,20 @@ pnpm install
 pnpm build
 ```
 
+You will be prompted to choose which package to build 'esbuild' or 'tsc'
+
+4. Make the CLI available globally:
+
+```bash
+pnpm link --global
+```
+
+or
+
+```bash
+pnpm link
+```
+
 ## Development
 
 1. Start the development servers:
@@ -121,10 +135,18 @@ pnpm build
 pnpm dev
 ```
 
+This will start the backend & frontend servers.
+
 2. Run tests:
 
 ```bash
 pnpm test
+```
+
+## CLI
+
+```bash
+give-me-the-odds ./examples/example1/millennium-falcon.json ./examples/example1/empire.json
 ```
 
 ## API Endpoints
