@@ -3,14 +3,15 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "pnpm run build:core && pnpm run build:cli && pnpm run dev:backend & pnpm run dev:frontend",
+    "dev": "pnpm run build:core && pnpm run dev:backend & pnpm run dev:frontend",
     "dev:frontend": "pnpm --filter frontend dev",
     "dev:backend": "pnpm --filter backend dev",
     "build:core": "pnpm --filter core build",
     "build:cli": "pnpm --filter cli build",
     "build": "pnpm run build:core && pnpm run build:cli && pnpm --filter frontend build && pnpm --filter backend build",
+    "test:core": "pnpm --filter core test",
+    "test": "pnpm run test:core",
     "start": "pnpm --filter backend start",
-    "cli": "pnpm --filter cli start",
     "lint": "eslint . --ext .ts,.tsx",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,mjs}\""
   },

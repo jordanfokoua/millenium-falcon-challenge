@@ -1,5 +1,5 @@
 {
-  "name": "give-me-the-odds",
+  "name": "cli",
   "version": "1.0.0",
   "private": true,
   "type": "module",
@@ -8,8 +8,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "dev": "tsx watch src/index.ts",
-    "start": "node dist/index.js"
+    "clean": "rm -rf dist",
+    "prebuild": "pnpm clean"
   },
   "dependencies": {
     "commander": "^11.1.0",
