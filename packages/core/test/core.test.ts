@@ -33,7 +33,7 @@ describe('calculateSuccessProbability', () => {
       const expectedValue = JSON.parse(readFileSync(join(basePath, 'answer.json'), 'utf8'));
       const routes = await db.getAllRoutes();
       const probability = calculateSuccessProbability(millenniumFalcon, empire, routes);
-      assert.strictEqual(probability, expectedValue.odds);
+      assert.strictEqual(probability, expectedValue.odds * 100);
       await db.close();
     });
   });
@@ -47,7 +47,7 @@ describe('calculateSuccessProbability', () => {
       const expectedValue = JSON.parse(readFileSync(join(basePath, 'answer.json'), 'utf8'));
       const routes = await db.getAllRoutes();
       const probability = calculateSuccessProbability(millenniumFalcon, empire, routes);
-      assert.strictEqual(probability, expectedValue.odds);
+      assert.strictEqual(probability, expectedValue.odds * 100);
       await db.close();
     });
   });
@@ -61,7 +61,7 @@ describe('calculateSuccessProbability', () => {
       const expectedValue = JSON.parse(readFileSync(join(basePath, 'answer.json'), 'utf8'));
       const routes = await db.getAllRoutes();
       const probability = calculateSuccessProbability(millenniumFalcon, empire, routes);
-      assert.strictEqual(probability, expectedValue.odds);
+      assert.strictEqual(probability, expectedValue.odds * 100);
       await db.close();
     });
   });
@@ -95,7 +95,7 @@ describe('calculateSuccessProbability', () => {
     const routes: Route[] = [{ origin: 'Tatooine', destination: 'Endor', travel_time: 6 }];
 
     const probability = calculateSuccessProbability(falcon, empire, routes);
-    assert.equal(probability, 1);
+    assert.equal(probability, 100);
   });
 
   it('should return the best success probability from multiple paths', () => {
@@ -119,6 +119,6 @@ describe('calculateSuccessProbability', () => {
     ];
 
     const probability = calculateSuccessProbability(falcon, empire, routes);
-    assert.equal(probability, 1);
+    assert.equal(probability, 100);
   });
 });
