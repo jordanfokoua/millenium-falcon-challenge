@@ -19,3 +19,12 @@ export interface BountyHunter {
   planet: string;
   day: number;
 }
+
+export interface PlanetVisit {
+  name: string;
+  day: number;
+}
+
+export interface Path {
+  planets: PlanetVisit[];
+}
