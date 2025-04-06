@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
+import { ValidationError } from './validation.js';
 import { calculateSuccessProbability } from 'core';
 import { loadInputs } from './loader.js';
-import { ValidationError } from './validation.js';
 
 const program = new Command();
 

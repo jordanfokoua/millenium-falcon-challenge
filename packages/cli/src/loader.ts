@@ -1,5 +1,5 @@
 import { Empire, MillenniumFalcon, Route, createDatabase } from 'core';
-import { ValidationError, validateEmpire, validateFileFormat, validateJson, validateMillenniumFalcon } from './validation';
+import { ValidationError, validateEmpire, validateFileFormat, validateJson, validateMillenniumFalcon } from './validation.js';
 
 import fs from 'fs';
 import path from 'path';
@@ -19,14 +19,12 @@ export async function loadInputs(falconPath: string, empirePath: string): Promis
     const empire = validateEmpire(empireData);
 
     if (!falcon.routes_db) {
-      throw new Error('routes_db is required in millennium-falcon.json');
+      throw new ValidationError('routes_db is required in millennium-falcon.json', 'INVALID_SCHEMA');
     }
 
-    const dbPath = path.isAbsolute(falcon.routes_db) ? falcon.routes_db : path.resolve(path.dirname(falconPath), falcon.routes_db);
-
-    if (!dbPath) {
-      throw new Error('routes_db is required in millennium-falcon.json');
-    }
+    const dbPath = path.isAbsolute(falcon.routes_db) 
+      ? falcon.routes_db 
+      : path.resolve(path.dirname(falconPath), falcon.routes_db);
 
     const db = await createDatabase({ path: dbPath });
     const routes = await db.getAllRoutes();
@@ -37,6 +35,9 @@ export async function loadInputs(falconPath: string, empirePath: string): Promis
     if (error instanceof ValidationError) {
       throw error;
     }
-    throw new ValidationError(error instanceof Error ? error.message : 'Unknown error occurred', 'LOAD_ERROR');
+    throw new ValidationError(
+      error instanceof Error ? error.message : 'Unknown error occurred',
+      'LOAD_ERROR'
+    );
   }
 }
