@@ -3,6 +3,7 @@
 import { Command } from 'commander';
 import { calculateSuccessProbability } from 'core';
 import { loadInputs } from './loader.js';
+import { ValidationError } from './validation.js';
 
 const program = new Command();
 
@@ -18,7 +19,11 @@ program
       const odds = calculateSuccessProbability(falcon, empire, routes);
       console.log(odds);
     } catch (error) {
-      console.error('Error:', error);
+      if (error instanceof ValidationError) {
+        console.error(`Error (${error.code}): ${error.message}`);
+      } else {
+        console.error('Error:', error instanceof Error ? error.message : 'Unknown error occurred');
+      }
       process.exit(1);
     }
   });
