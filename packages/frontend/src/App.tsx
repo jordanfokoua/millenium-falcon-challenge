@@ -100,7 +100,7 @@ function App() {
         <Header />
 
         <div className="space-y-6">
-          {!odds && (
+          {odds === null && (
             <>
               <p className="text-center text-gray-500 m-2">
                 Upload your empire.json file to calculate the odds of the Millennium Falcon completing its mission.
