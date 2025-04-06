@@ -14,6 +14,7 @@ export function findAllPaths(falcon: MillenniumFalcon, empire: Empire, routes: R
   // Build a bi-directional graph from the routes for easy traversal.
   const graph = buildGraph(routes);
   const paths: Path[] = [];
+  const REFUEL_COST = 1;
 
   /**
    * Depth-first search to explore paths
@@ -47,10 +48,10 @@ export function findAllPaths(falcon: MillenniumFalcon, empire: Empire, routes: R
       if (fuel < travelTime && falcon.autonomy >= travelTime) {
         dfs({
           planet: nextPlanet,
-          day: day + travelTime,
+          day: day + REFUEL_COST + travelTime,
           fuel: falcon.autonomy - travelTime, // Reset fuel to full autonomy, then subtract jump fuel.
           // Record the current planet (stop) and the refuel stop (same planet, next day).
-          path: [...path, { name: planet, day }, { name: planet, day: day }],
+          path: [...path, { name: planet, day }, { name: planet, day: day + REFUEL_COST }],
         });
       }
     }
